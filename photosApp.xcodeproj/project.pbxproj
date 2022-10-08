@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		A786006128EF136500318D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786006028EF136500318D7C /* AppDelegate.swift */; };
 		A786006328EF136500318D7C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786006228EF136500318D7C /* SceneDelegate.swift */; };
-		A786006528EF136500318D7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786006428EF136500318D7C /* ViewController.swift */; };
-		A786006828EF136500318D7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A786006628EF136500318D7C /* Main.storyboard */; };
 		A786006A28EF136500318D7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A786006928EF136500318D7C /* Assets.xcassets */; };
-		A786006D28EF136500318D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A786006B28EF136500318D7C /* LaunchScreen.storyboard */; };
+		A786007528EF13F700318D7C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786007428EF13F700318D7C /* TabBarController.swift */; };
+		A786007B28EF16B400318D7C /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786007A28EF16B400318D7C /* PhotoService.swift */; };
+		A786007D28EF16CF00318D7C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786007C28EF16CF00318D7C /* PhotosViewController.swift */; };
+		A786007F28EF171400318D7C /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786007E28EF171400318D7C /* FavoriteViewController.swift */; };
+		A786008128EF174D00318D7C /* PhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786008028EF174D00318D7C /* PhotosPresenter.swift */; };
+		A786008328EF45D300318D7C /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786008228EF45D300318D7C /* PhotosModel.swift */; };
+		A786008528EF46A700318D7C /* PhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786008428EF46A700318D7C /* PhotoData.swift */; };
+		A786008728F03F7000318D7C /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786008628F03F7000318D7C /* PhotosCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A786005D28EF136500318D7C /* photosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A786006028EF136500318D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A786006228EF136500318D7C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A786006428EF136500318D7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A786006728EF136500318D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A786006928EF136500318D7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A786006C28EF136500318D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A786006E28EF136500318D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A786007428EF13F700318D7C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		A786007A28EF16B400318D7C /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		A786007C28EF16CF00318D7C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		A786007E28EF171400318D7C /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		A786008028EF174D00318D7C /* PhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresenter.swift; sourceTree = "<group>"; };
+		A786008228EF45D300318D7C /* PhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModel.swift; sourceTree = "<group>"; };
+		A786008428EF46A700318D7C /* PhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoData.swift; sourceTree = "<group>"; };
+		A786008628F03F7000318D7C /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +68,50 @@
 			children = (
 				A786006028EF136500318D7C /* AppDelegate.swift */,
 				A786006228EF136500318D7C /* SceneDelegate.swift */,
-				A786006428EF136500318D7C /* ViewController.swift */,
-				A786006628EF136500318D7C /* Main.storyboard */,
+				A786007928EF168C00318D7C /* NetworkService */,
+				A786007628EF166100318D7C /* Model */,
+				A786007728EF166900318D7C /* View */,
+				A786007828EF167000318D7C /* Presenter */,
 				A786006928EF136500318D7C /* Assets.xcassets */,
-				A786006B28EF136500318D7C /* LaunchScreen.storyboard */,
 				A786006E28EF136500318D7C /* Info.plist */,
 			);
 			path = photosApp;
+			sourceTree = "<group>";
+		};
+		A786007628EF166100318D7C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A786008228EF45D300318D7C /* PhotosModel.swift */,
+				A786008428EF46A700318D7C /* PhotoData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A786007728EF166900318D7C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A786007428EF13F700318D7C /* TabBarController.swift */,
+				A786007C28EF16CF00318D7C /* PhotosViewController.swift */,
+				A786008628F03F7000318D7C /* PhotosCollectionViewCell.swift */,
+				A786007E28EF171400318D7C /* FavoriteViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A786007828EF167000318D7C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A786008028EF174D00318D7C /* PhotosPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		A786007928EF168C00318D7C /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				A786007A28EF16B400318D7C /* PhotoService.swift */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A786006D28EF136500318D7C /* LaunchScreen.storyboard in Resources */,
 				A786006A28EF136500318D7C /* Assets.xcassets in Resources */,
-				A786006828EF136500318D7C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,32 +183,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A786006528EF136500318D7C /* ViewController.swift in Sources */,
+				A786007B28EF16B400318D7C /* PhotoService.swift in Sources */,
+				A786008728F03F7000318D7C /* PhotosCollectionViewCell.swift in Sources */,
+				A786007528EF13F700318D7C /* TabBarController.swift in Sources */,
+				A786008528EF46A700318D7C /* PhotoData.swift in Sources */,
+				A786008328EF45D300318D7C /* PhotosModel.swift in Sources */,
 				A786006128EF136500318D7C /* AppDelegate.swift in Sources */,
 				A786006328EF136500318D7C /* SceneDelegate.swift in Sources */,
+				A786007F28EF171400318D7C /* FavoriteViewController.swift in Sources */,
+				A786008128EF174D00318D7C /* PhotosPresenter.swift in Sources */,
+				A786007D28EF16CF00318D7C /* PhotosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		A786006628EF136500318D7C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A786006728EF136500318D7C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		A786006B28EF136500318D7C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A786006C28EF136500318D7C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A786006F28EF136500318D7C /* Debug */ = {
@@ -292,7 +325,6 @@
 				INFOPLIST_FILE = photosApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +352,6 @@
 				INFOPLIST_FILE = photosApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
