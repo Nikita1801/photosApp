@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Nuke
 
-class PhotosCollectionViewCell: UICollectionViewCell {
+final class PhotosCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +31,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .white
+        imageView.layer.cornerRadius = 12
+        imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         
@@ -37,8 +40,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }()
     
     func set(photo: Photos) {
-        let url = photo.urls["regular"]
-        print("URL OF THIS PHOTO IS: \(url)")
+        let url = photo.urls.regular
+        Nuke.loadImage(with: url, into: photoImageView)
     }
 }
 

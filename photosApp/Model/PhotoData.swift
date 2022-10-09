@@ -12,13 +12,25 @@ struct PhotoData: Codable {
 }
 
 struct Photos: Codable {
-    let urls: [Urls.RawValue: String]
+    let urls: URLs
+    let user: User
+    let created_at: String
+    let likes: Int
+    let width: Int
+    let height: Int
+}
+
+struct URLs: Codable {
+    let raw: String
+    let full: String
+    let regular: String
+    let small: String
+    let thumb: String
+}
+
+struct User: Codable {
+    let username: String
+    let name: String
+    let location: String?
     
-    enum Urls: String {
-        case raw
-        case full
-        case regular
-        case small
-        case thumb
-    }
 }

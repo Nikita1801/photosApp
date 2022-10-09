@@ -22,7 +22,7 @@ final class PhotosModel {
 
 extension PhotosModel: PhotosModelProtocol {
     func getPhotosByKeyword(query: String, completed: @escaping (PhotoData) -> Void) {
-        let url = "https://api.unsplash.com/search/photos?page=1&query=\(query)&per_page=30&client_id=-1xc7qe0LH0jZbvV8T5mpzhS4RWyC8EpsNnSBkIQAKg"
+        let url = "https://api.unsplash.com/search/photos?page=1&query=\(query)&per_page=50&client_id=-1xc7qe0LH0jZbvV8T5mpzhS4RWyC8EpsNnSBkIQAKg"
         network.getPhotos(url: url) { photo in
             guard let photo = photo else { return }
             
@@ -33,21 +33,11 @@ extension PhotosModel: PhotosModelProtocol {
     
     
     func getPhotos(completed: @escaping (PhotoData) -> Void) {
-        let dispatchGroup = DispatchGroup()
-        var photos: PhotoData?
-        dispatchGroup.enter()
-        let url = " " // ENTER URL
+        let url = "https://api.unsplash.com/photos/random?count=30&client_id=-1xc7qe0LH0jZbvV8T5mpzhS4RWyC8EpsNnSBkIQAKg"
         network.getPhotos(url: url) { photo in
-            if let photo = photo {
-//                  photos.append(photo)
-              }
-              dispatchGroup.leave()
-        }
-        
-        dispatchGroup.notify(queue: .main) {
-            guard let photos = photos else { return }
-            completed(photos)
+            guard let photo = photo else { return }
+            
+            completed(photo)
         }
     }
-    
 }

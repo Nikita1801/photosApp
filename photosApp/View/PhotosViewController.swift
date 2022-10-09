@@ -11,11 +11,27 @@ protocol PhotosViewControllerProtocol: AnyObject {
     func updatePhotos(_ photos: PhotoData)
 }
 
+protocol PhotosViewControllerDelegate: AnyObject {
+    func addToFavorite(photo: Photos)
+    func deleteFromFavorite(photo: Photos)
+}
+
+
+
+
 final class PhotosViewController: UIViewController {
     
+
+    private lazy var detailViewController: DetailsViewControllerDelegate = {
+        let detail = DetailViewController()
+        detail.photosDelegate = self
+        return detail
+    }()
+
     private var presenter: PhotosPresenterProtocol?
     private var timer: Timer?
     private var photosArray: [Photos] = []
+    private let collectionInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +50,8 @@ final class PhotosViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.isScrollEnabled = true
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = UIColor.lightGray
+        collectionView.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        collectionView.contentInsetAdjustmentBehavior = .automatic
         
         return collectionView
     }()
@@ -71,7 +88,7 @@ private extension PhotosViewController {
     }
     
     func configureView() {
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
         photosCollectionView.dataSource = self
         photosCollectionView.delegate = self
         
@@ -87,8 +104,8 @@ private extension PhotosViewController {
         
         NSLayoutConstraint.activate([
             photosCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            photosCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            photosCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            photosCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            photosCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             photosCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
@@ -106,7 +123,7 @@ extension PhotosViewController: UISearchBarDelegate {
     }
 }
 
-extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photosArray.count
     }
@@ -116,10 +133,43 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         let photo = photosArray[indexPath.row]
         cell.set(photo: photo)
         
-        cell.backgroundColor = .red
+//        cell.backgroundColor = .lightGray
         
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photo = photosArray[indexPath.row]
+        detailViewController.didTapPhoto(photo: photo)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let photo = photosArray[indexPath.row]
+        let width = view.frame.width / 2.3
+        let height = CGFloat(photo.height) * width / CGFloat(photo.width)
+        
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        collectionInsets
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        collectionInsets.left
+    }
+    
+}
+
+extension PhotosViewController: PhotosViewControllerDelegate {
+
+    func addToFavorite(photo: Photos) {
+        print("Add to favorite")
+        
+    }
+    
+    func deleteFromFavorite(photo: Photos) {
+        print("Delete from favorite")
+    }
 }
