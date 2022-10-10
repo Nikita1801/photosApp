@@ -12,6 +12,10 @@ import UIKit
 //    func addToFavorite(photo: Photos)
 //}
 
+protocol FavoriteViewControllerDelegate: AnyObject {
+    func getFavoritePhoto(photo: Photos)
+}
+
 final class FavoriteViewController: UIViewController {
     
 //    private lazy var detailViewController: DetailsViewControllerDelegate = {
@@ -19,13 +23,16 @@ final class FavoriteViewController: UIViewController {
 //        detail.favoriteDelegate = self
 //        return detail
 //    }()
+    
+    private let photosViewController = PhotosViewController()
     private let collectionInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     private var favoritePhotos: [Photos] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        photosViewController.favoriteDelegate = self
         
-        view.backgroundColor = .purple
+        configureView()
     }
     
     private let photosCollectionView: UICollectionView = {
@@ -104,8 +111,16 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 }
 
-//extension FavoriteViewController: FavoriteViewControllerDelegate {
-//    func addToFavorite(photo: Photos) {
-//        print("Add to favorite")
-//    }
-//}
+
+extension FavoriteViewController: FavoriteViewControllerDelegate {
+    func getFavoritePhoto(photo: Photos) {
+        print("Get")
+    }
+    
+    
+    //extension FavoriteViewController: FavoriteViewControllerDelegate {
+    //    func addToFavorite(photo: Photos) {
+    //        print("Add to favorite")
+    //    }
+    //}
+}

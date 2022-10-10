@@ -8,13 +8,13 @@
 import Foundation
 
 protocol PhotoServiceProtocol {
-    func getPhotos(url: String, completionHandler: @escaping (PhotoData?) -> Void)
+    func getPhotosByKeyword(url: String, completionHandler: @escaping (PhotoData?) -> Void)
+    func getPhotos(url: String, completionHandler: @escaping ([Photos]?) -> Void)
 }
 
 final class PhotoService: PhotoServiceProtocol {
-    
-    
-    func getPhotos(url: String, completionHandler: @escaping (PhotoData?) -> Void) {
+
+    func getPhotosByKeyword(url: String, completionHandler: @escaping (PhotoData?) -> Void) {
         guard let url = URL(string: url) else {
             completionHandler(nil)
             return
@@ -32,6 +32,26 @@ final class PhotoService: PhotoServiceProtocol {
             completionHandler(model)
         }
     }
+    
+    func getPhotos(url: String, completionHandler: @escaping ([Photos]?) -> Void) {
+        guard let url = URL(string: url) else {
+            completionHandler(nil)
+            return
+        }
+        
+        getRequest(url: url) { data in
+            guard let data = data,
+                  let model = try? JSONDecoder().decode([Photos].self, from: data)
+            else {
+                print("Error while decoding")
+                completionHandler(nil)
+                return
+            }
+            
+            completionHandler(model)
+        }
+    }
+    
 }
 
 private extension PhotoService {

@@ -30,7 +30,7 @@ final class DetailViewController: UIViewController {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.backgroundColor = .white
-        imageView.layer.cornerRadius = 6
+        imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -151,7 +151,7 @@ private extension DetailViewController {
             photoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             photoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            photoImageView.heightAnchor.constraint(lessThanOrEqualToConstant: view.frame.height/1.8),
+            photoImageView.heightAnchor.constraint(lessThanOrEqualToConstant: view.frame.height * 0.7),
             
             locationStackView.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 5),
             locationStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -166,6 +166,7 @@ private extension DetailViewController {
             nameStackView.topAnchor.constraint(equalTo: locationStackView.bottomAnchor, constant: 20),
             nameStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             nameStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            nameStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -10),
             
             nameLabel.topAnchor.constraint(equalTo: nameStackView.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: nameStackView.leadingAnchor, constant: 16),
@@ -176,9 +177,8 @@ private extension DetailViewController {
             favoriteButton.heightAnchor.constraint(equalToConstant: 22),
             favoriteButton.widthAnchor.constraint(equalToConstant: 26),
             
-            dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
-            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            dateLabel.topAnchor.constraint(equalTo: favoriteButton.bottomAnchor, constant: 8),
+            dateLabel.trailingAnchor.constraint(equalTo: nameStackView.trailingAnchor, constant: -16)
             
         ])
     }
@@ -186,9 +186,13 @@ private extension DetailViewController {
 
 extension DetailViewController: DetailsViewControllerDelegate {
     func didTapPhoto(photo: Photos) {
+        var date = photo.created_at
+        if let timeRange = date.range(of: "T") {
+          date.removeSubrange(timeRange.lowerBound..<date.endIndex)
+        }
         photoInfo = photo
         nameLabel.text = "\(photo.user.username) (\(photo.user.name))"
-        dateLabel.text = photo.created_at
+        dateLabel.text = date
         locationLabel.text = photo.user.location
         likesLabel.text = String("\(photo.likes) likes")
         

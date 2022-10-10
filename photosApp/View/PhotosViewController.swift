@@ -8,15 +8,13 @@
 import UIKit
 
 protocol PhotosViewControllerProtocol: AnyObject {
-    func updatePhotos(_ photos: PhotoData)
+    func updatePhotos(_ photos: [Photos])
 }
 
 protocol PhotosViewControllerDelegate: AnyObject {
     func addToFavorite(photo: Photos)
     func deleteFromFavorite(photo: Photos)
 }
-
-
 
 
 final class PhotosViewController: UIViewController {
@@ -28,6 +26,7 @@ final class PhotosViewController: UIViewController {
         return detail
     }()
 
+    weak var favoriteDelegate: FavoriteViewControllerDelegate?
     private var presenter: PhotosPresenterProtocol?
     private var timer: Timer?
     private var photosArray: [Photos] = []
@@ -67,10 +66,13 @@ final class PhotosViewController: UIViewController {
 }
 
 extension PhotosViewController: PhotosViewControllerProtocol {
-    func updatePhotos(_ photos: PhotoData) {
-        photosArray = photos.results
+    func updatePhotos(_ photos: [Photos]) {
+        if photos == [] {
+            presenter?.getPhotos()
+        }
+        photosArray = photos
         photosCollectionView.reloadData()
-        print(photos.results)
+        print(photos)
     }
     
 }
@@ -115,7 +117,8 @@ extension PhotosViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
 
-//        timer = Timer(timeInterval: 0.5, repeats: true, block: { (timer) in
+//        timer?.invalidate()
+//        timer = Timer(timeInterval: 1.0, repeats: false, block: { (_) in
             self.presenter?.getPhotosByKeyword(query: searchText)
 //            print("after 1 sec")
 //        })
@@ -166,10 +169,13 @@ extension PhotosViewController: PhotosViewControllerDelegate {
 
     func addToFavorite(photo: Photos) {
         print("Add to favorite")
-        
+        favoriteDelegate?.getFavoritePhoto(photo: photo)
     }
     
     func deleteFromFavorite(photo: Photos) {
         print("Delete from favorite")
+        favoriteDelegate?.getFavoritePhoto(photo: photo)
     }
 }
+
+

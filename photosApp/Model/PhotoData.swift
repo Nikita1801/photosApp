@@ -11,7 +11,7 @@ struct PhotoData: Codable {
     let results: [Photos]
 }
 
-struct Photos: Codable {
+struct Photos: Codable, Equatable {
     let urls: URLs
     let user: User
     let created_at: String
@@ -20,7 +20,7 @@ struct Photos: Codable {
     let height: Int
 }
 
-struct URLs: Codable {
+struct URLs: Codable, Equatable {
     let raw: String
     let full: String
     let regular: String
@@ -28,7 +28,7 @@ struct URLs: Codable {
     let thumb: String
 }
 
-struct User: Codable {
+struct User: Codable, Equatable {
     let username: String
     let name: String
     let location: String?

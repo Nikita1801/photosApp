@@ -27,7 +27,7 @@ extension PhotosPresenter: PhotosPresenterProtocol {
     func getPhotosByKeyword(query: String) {
         model.getPhotosByKeyword(query: query) { photos in
             DispatchQueue.main.async {
-                self.viewController?.updatePhotos(photos)
+                self.viewController?.updatePhotos(photos.results)
             }
         }
     }
@@ -39,6 +39,4 @@ extension PhotosPresenter: PhotosPresenterProtocol {
             }
         }
     }
-    
-    
 }
