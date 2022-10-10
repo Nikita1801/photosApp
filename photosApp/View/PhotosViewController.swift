@@ -9,6 +9,7 @@ import UIKit
 
 protocol PhotosViewControllerProtocol: AnyObject {
     func updatePhotos(_ photos: [Photos])
+    func showAlert(isGet: Bool)
 }
 
 protocol PhotosViewControllerDelegate: AnyObject {
@@ -30,6 +31,7 @@ final class PhotosViewController: UIViewController {
     private var presenter: PhotosPresenterProtocol?
     private var timer: Timer?
     private var photosArray: [Photos] = []
+    private var searchQuery = ""
     private let collectionInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     
     override func viewDidLoad() {
@@ -62,7 +64,6 @@ final class PhotosViewController: UIViewController {
         
         return label
     }()
-    
 }
 
 extension PhotosViewController: PhotosViewControllerProtocol {
@@ -70,10 +71,30 @@ extension PhotosViewController: PhotosViewControllerProtocol {
         if photos == [] {
             presenter?.getPhotos()
         }
+
         photosArray = photos
         photosCollectionView.reloadData()
         print(photos)
     }
+
+    /// Show alert when getting error from the server
+    func showAlert(isGet: Bool) {
+            // create the alert
+            let alert = UIAlertController(title: "Error while loading data",
+                                          message: "Would you like to try again?",
+                                          preferredStyle: UIAlertController.Style.alert)
+            
+            // add the actions (buttons)
+            alert.addAction(UIAlertAction(title: "Try again",
+                                          style: UIAlertAction.Style.default,
+                                          handler: { _ in
+                if isGet { self.presenter?.getPhotos() }
+                else { self.presenter?.getPhotosByKeyword(query: self.searchQuery)}
+                 } ))
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.cancel, handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+        }
     
 }
 
@@ -82,6 +103,7 @@ private extension PhotosViewController {
     func getPhotos() {
         presenter?.getPhotos()
     }
+    
     
     func configureSerachBar() {
         let searchBar = UISearchController(searchResultsController: nil)
@@ -117,6 +139,8 @@ extension PhotosViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
 
+        searchQuery = searchText
+        
 //        timer?.invalidate()
 //        timer = Timer(timeInterval: 1.0, repeats: false, block: { (_) in
             self.presenter?.getPhotosByKeyword(query: searchText)

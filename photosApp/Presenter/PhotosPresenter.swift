@@ -25,9 +25,14 @@ final class PhotosPresenter {
 
 extension PhotosPresenter: PhotosPresenterProtocol {
     func getPhotosByKeyword(query: String) {
-        model.getPhotosByKeyword(query: query) { photos in
+        model.getPhotosByKeyword(query: query) { [weak viewController] photos in
             DispatchQueue.main.async {
-                self.viewController?.updatePhotos(photos.results)
+            guard let photos = photos else {
+                viewController?.showAlert(isGet: false)
+                return
+            }
+            
+                viewController?.updatePhotos(photos.results)
             }
         }
     }
@@ -35,6 +40,11 @@ extension PhotosPresenter: PhotosPresenterProtocol {
     func getPhotos() {
         model.getPhotos { [weak viewController] photos in
             DispatchQueue.main.async {
+            guard let photos = photos else {
+                viewController?.showAlert(isGet: true)
+                return
+            }
+            
                 viewController?.updatePhotos(photos)
             }
         }
